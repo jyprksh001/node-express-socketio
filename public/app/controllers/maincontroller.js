@@ -1,10 +1,16 @@
 app.controller('mainController',["$scope","authFactory","$location","socket",function($scope,auth,location,socket){
 
 	$scope.isLoggedIn=auth.isLoggedIn()
-
+	$scope.messages=[]
 	if($scope.isLoggedIn){
 		auth.getUser().then(function(data){
 			$scope.user=data.data.name
+		})
+		auth.getAll().then(function(data){
+			 angular.forEach(data.data,function(el){
+			 	$scope.messages.push(el.text)
+			 })
+
 		})
 	}
 
@@ -18,7 +24,6 @@ app.controller('mainController',["$scope","authFactory","$location","socket",fun
 		$scope.text={}
 	}
 
-	$scope.messages=[]
 	var socket = io.connect('http://localhost:7000', {
   		'query': 'token=' + auth.getToken()
 	});
@@ -35,7 +40,6 @@ app.controller('mainController',["$scope","authFactory","$location","socket",fun
 		$scope.clear()
 		$scope.$apply() 
 	})
-
 
 	socket.on('user joined',function(data){
 		console.log(data)

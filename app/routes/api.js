@@ -90,8 +90,8 @@ module.exports=function(app, express){
 			res.status(403).send({ success: false, message: "No Token Provided"});
 		}
 	});
-	api.get('/',function(req, res) {
-			Chat.find({}, function(err, chats) {
+	api.get('/allchat',function(req,res) {
+			Chat.find({}, function(err,chats) {
 				if(err) {
 					res.send(err);
 					return;

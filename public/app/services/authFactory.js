@@ -46,5 +46,11 @@ app.factory("authFactory",["$window","$location","$http",function(window,locatio
 		else
 			return $q.reject({ message: "User has no token"});
 	}
+	authFactory.getAll=function () {
+		if(authFactory.getToken())
+			return $http.get('/api/allchat')
+		else
+			return $q.reject({ message: "User has no token"});
+	}
 	return authFactory;
 }])

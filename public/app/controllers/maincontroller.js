@@ -34,7 +34,7 @@ app.controller('mainController',["$scope","authFactory","$location","socket",fun
 	socket.on('message created',function(data){
 		console.log("message created")
 		$scope.messages.push(data)
-		$scope.clear()		
+		$scope.$apply() 
 	})
 
 

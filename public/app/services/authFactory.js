@@ -20,7 +20,6 @@ app.factory("authFactory",["$window","$location","$http",function(window,locatio
 		})
 		.success(function(data) {
 			authFactory.setToken(data.token);
-			console.log(data)
 			return data;
 		})
 	}
@@ -31,7 +30,7 @@ app.factory("authFactory",["$window","$location","$http",function(window,locatio
 
 	authFactory.logout = function() {
 		authFactory.setToken();
-		location.path('/')
+		location.path('/login')
 	}
 
 	authFactory.isLoggedIn = function() {

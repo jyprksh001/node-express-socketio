@@ -1,6 +1,7 @@
 app.controller('AuthController',["$scope","$location","authFactory","$timeout",function(scope,location,auth,timeout){
 	scope.login=function(user){
-		auth.login(user).then(function(data){			
+		auth.login(user).then(function(data){	
+				console.log(auth.isLoggedIn())		
 				location.path('/');
 		})
 	};

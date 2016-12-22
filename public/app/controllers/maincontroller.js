@@ -1,14 +1,12 @@
 app.controller('mainController',["$scope","authFactory","$location","socket",function($scope,auth,location,socket){
+
 	$scope.isLoggedIn=auth.isLoggedIn()
-	
+
 	if($scope.isLoggedIn){
-		//console.log("i ama here")
 		auth.getUser().then(function(data){
-			console.log(data)
 			$scope.user=data.data.name
 		})
 	}
-
 
 	$scope.logout=function(){
 		//console.log("logout clicked")
@@ -34,6 +32,7 @@ app.controller('mainController',["$scope","authFactory","$location","socket",fun
 	socket.on('message created',function(data){
 		console.log("message created")
 		$scope.messages.push(data)
+		$scope.clear()
 		$scope.$apply() 
 	})
 
@@ -47,7 +46,5 @@ app.controller('mainController',["$scope","authFactory","$location","socket",fun
 	$scope.submit=function(text){
 		socket.emit('new message',{text:text})
 	}
-
-	
 
 }])

@@ -19,11 +19,13 @@ module.exports=function(io){
             socket.join(defaultRoom);
             io.in(defaultRoom).emit('user joined', socket.decoded_token.name);  
           })
-          
+
           socket.on('new message',function(data) {
                     //Create message
-                    console.log(data)
+                    //console.log(data)
+                    console.log(socket.decoded_token)
                     var newMsg = new Chat({
+                                  user:socket.decoded_token.id,
                                   text:data.text
                                 });
                     //Save it to database

@@ -1,0 +1,32 @@
+<div class="jumbotron text-center" ng-if="!isLoggedIn">	
+	<div>
+		<h1>Sign up here!</h1>
+	</div>
+	<div>
+		<p>login to enter chat</p>
+		<a href="/login" class="btn btn-primary">Login</a>
+	</div>
+</div>
+<div class="row" ng-if="isLoggedIn">
+	<div class="col-md-3">
+	</div>
+	<div class="col-md-4" >
+		<div class="row">
+			<div class="panel panel-success"  style="overflow-y: auto;height:400px; width: 433px;">
+				<div class="panel-body" style="height:32px; width:300px;" ng-repeat="message in messages track by $index">
+					<p class="panel-body" >{{message}}</p>
+				</div>
+			</div>
+
+			<div class="panel panel-primary">
+				<div class="panel-body">
+				<form ng-submit="submit(textdata)" name="textInput">
+					<input class="form-control input-lg" type="text" placeholder="Chat box" ng-model="textdata">
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+	</div>
+</div>

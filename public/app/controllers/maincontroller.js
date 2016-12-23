@@ -44,6 +44,8 @@ app.controller('mainController',["$scope","authFactory","$location","socket",fun
 	socket.on('user joined',function(data){
 		console.log(data)
 	 	$scope.messages.push(data+' joined')
+	 	$scope.$apply()
+
 	}) 
 
 	

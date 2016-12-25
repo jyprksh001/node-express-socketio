@@ -39,8 +39,8 @@ app.controller('homeController',["$scope","authFactory","$location","socket",fun
 	 	$scope.$apply()
 
 	})
-	$scope.submitData=function(text){
-		socket.emit('new message',{text:$scope.textdata})
+	$scope.submitData=function(textdata){
+		socket.emit('new message',{text:textdata.text})
 	}
 
 }])

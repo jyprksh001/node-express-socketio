@@ -6,6 +6,7 @@ app.controller('mainController',["$scope","authFactory","$location",function($sc
 			$scope.user=data.data.name
 		})
 	}
+
 	$scope.$on('msgid', function(event, msg) {
     	$scope.isLoggedIn=msg.isLoggedIn
   	});
@@ -15,7 +16,5 @@ app.controller('mainController',["$scope","authFactory","$location",function($sc
 		auth.logout()
 		$scope.isLoggedIn=false
 	}
-
-
 
 }])

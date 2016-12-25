@@ -23,16 +23,21 @@ module.exports=function(io){
           socket.on('new message',function(data) {
                     //Create message
                     //console.log(data)
-                    console.log(socket.decoded_token)
+                    //console.log(socket.decoded_token)
+                    //console.log(data)
                     var newMsg = new Chat({
                                   user:socket.decoded_token.id,
                                   text:data.text
                                 });
                     //Save it to database
-                    
                     newMsg.save(function(err, msg){
                       //Send message to those connected in the room
-                      io.in(defaultRoom).emit('message created', data.text);
+                      //console.log(msg)
+                      if(!err){
+                        console.log(msg)
+                        io.in(defaultRoom).emit('message created', msg);
+                      }
+                      
                     });
           });
     })

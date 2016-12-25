@@ -2,6 +2,7 @@ app.controller('homeController',["$scope","authFactory","$location","socket",fun
 
 	$scope.isLoggedIn=auth.isLoggedIn()
 	$scope.messages=[]
+	$scope.textdata={}
 	if($scope.isLoggedIn){
 		auth.getAll().then(function(data){
 			 angular.forEach(data.data,function(el){
@@ -27,8 +28,8 @@ app.controller('homeController',["$scope","authFactory","$location","socket",fun
 
 	socket.on('message created',function(data){
 		console.log("message created")
-		$scope.messages.push(data)
-		$scope.textdata=''
+		$scope.messages.push(data.text)
+		$scope.textdata={}
 		$scope.$apply() 
 	})
 
@@ -37,11 +38,9 @@ app.controller('homeController',["$scope","authFactory","$location","socket",fun
 	 	$scope.messages.push(data+' joined')
 	 	$scope.$apply()
 
-	}) 
-
-	$scope.submit=function(text){
-		$scope.textdata=text;
-		socket.emit('new message',{text:text})
+	})
+	$scope.submitData=function(text){
+		socket.emit('new message',{text:$scope.textdata})
 	}
 
 }])

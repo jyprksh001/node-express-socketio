@@ -2,7 +2,7 @@ app.config(function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when('/', {
 			templateUrl: 'app/views/pages/home.html',
-			controller:  'mainController'
+			controller:  'homeController'
 		})
 		.when('/login', {
 			templateUrl: 'app/views/pages/login.html',

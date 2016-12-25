@@ -1,22 +1,14 @@
-app.controller('mainController',["$scope","authFactory","$location","socket",function($scope,auth,location,socket){
+app.controller('homeController',["$scope","authFactory","$location","socket",function($scope,auth,location,socket){
 
 	$scope.isLoggedIn=auth.isLoggedIn()
 	$scope.messages=[]
+	
 	if($scope.isLoggedIn){
-		auth.getUser().then(function(data){
-			$scope.user=data.data.name
-		})
 		auth.getAll().then(function(data){
 			 angular.forEach(data.data,function(el){
 			 	$scope.messages.push(el.text)
 			 })
-
 		})
-	}
-
-	$scope.logout=function(){
-		//console.log("logout clicked")
-		auth.logout()
 	}
 
 	$scope.clear=function(){
@@ -48,7 +40,6 @@ app.controller('mainController',["$scope","authFactory","$location","socket",fun
 
 	}) 
 
-	
 	$scope.submit=function(text){
 		socket.emit('new message',{text:text})
 	}

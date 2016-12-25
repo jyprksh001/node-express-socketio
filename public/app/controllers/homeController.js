@@ -2,7 +2,6 @@ app.controller('homeController',["$scope","authFactory","$location","socket",fun
 
 	$scope.isLoggedIn=auth.isLoggedIn()
 	$scope.messages=[]
-	
 	if($scope.isLoggedIn){
 		auth.getAll().then(function(data){
 			 angular.forEach(data.data,function(el){
@@ -11,10 +10,10 @@ app.controller('homeController',["$scope","authFactory","$location","socket",fun
 		})
 	}
 
-	$scope.clear=function(){
-		console.log($scope.text)
-		$scope.text={}
-	}
+	// $scope.clear=function(){
+	// 	console.log($scope.textdata)
+	// 	$scope.textdata=''
+	// }
 
 	var socket = io.connect('http://localhost:7000', {
   		'query': 'token=' + auth.getToken()
@@ -29,7 +28,7 @@ app.controller('homeController',["$scope","authFactory","$location","socket",fun
 	socket.on('message created',function(data){
 		console.log("message created")
 		$scope.messages.push(data)
-		$scope.clear()
+		$scope.textdata=''
 		$scope.$apply() 
 	})
 
@@ -41,6 +40,7 @@ app.controller('homeController',["$scope","authFactory","$location","socket",fun
 	}) 
 
 	$scope.submit=function(text){
+		$scope.textdata=text;
 		socket.emit('new message',{text:text})
 	}
 

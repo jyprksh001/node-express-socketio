@@ -1,7 +1,7 @@
-app.controller('AuthController',["$scope","$location","authFactory","$timeout",function(scope,location,auth,timeout){
+app.controller('AuthController',["$scope","$location","authFactory","$timeout","$rootScope",function(scope,location,auth,timeout,$rootScope){
 	scope.login=function(user){
-		auth.login(user).then(function(data){	
-				console.log(auth.isLoggedIn())		
+		auth.login(user).then(function(data){
+				$rootScope.$broadcast('msgid',{isLoggedIn:true});	
 				location.path('/');
 		})
 	};
